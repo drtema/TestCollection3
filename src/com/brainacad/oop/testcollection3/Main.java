@@ -1,16 +1,18 @@
 package com.brainacad.oop.testcollection3;
 
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Dr.tema on 10.03.17.
  */
 public class Main {
+    static void printElements(Collection collection){
+        Iterator iterator = collection.iterator();
+        while (iterator.hasNext()){
+            System.out.println(iterator.next());
+        }
+    }
+
     public static void main(String... a){
         List<String> arrayList = new ArrayList<String>();
         List<String> linkedList = new LinkedList<String>();
@@ -20,22 +22,34 @@ public class Main {
         }
 
         for (int i = 0; i < 10; i++) {
-            linkedList.add((int)(Math.random()*linkedList.size()),"number_" + i);
+            linkedList.add((int)(Math.random()*linkedList.size()),"num_" + i);
         }
 
-        Iterator<String> linkedListIterator= linkedList.iterator();
-        Iterator<String> arrayListIterator = arrayList.iterator();
+        printElements(arrayList);
 
-        while (arrayListIterator.hasNext()){
-            System.out.println(arrayListIterator.next());
+        System.out.println();
+
+        printElements(linkedList);
+
+        ListIterator<String> listIterator = linkedList.listIterator();
+        ListIterator<String> listIterator1 = arrayList.listIterator();
+
+        while (listIterator.hasNext()){
+            listIterator.next();
+            listIterator.add(listIterator1.next());
         }
 
         System.out.println();
 
-        while (linkedListIterator.hasNext()){
-            System.out.println(linkedListIterator.next());
+        printElements(linkedList);
+
+        while (listIterator.hasPrevious()){
+            listIterator.previous();
+            listIterator.add(listIterator1.previous());
         }
 
-        
+        System.out.println();
+
+        printElements(linkedList);
     }
 }
